@@ -1,7 +1,6 @@
-package ecole.projetEcole.dto.personne;
+package ecole.projetEcole.entity.personne;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Personne implements Serializable {
 

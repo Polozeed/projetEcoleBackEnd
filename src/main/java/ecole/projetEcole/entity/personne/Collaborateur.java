@@ -1,9 +1,8 @@
-package ecole.projetEcole.dto.personne;
+package ecole.projetEcole.entity.personne;
 
-import ecole.projetEcole.dto.ecole.Formation;
+import ecole.projetEcole.entity.ecole.Formation;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Collaborateur extends Personne implements Serializable {
 

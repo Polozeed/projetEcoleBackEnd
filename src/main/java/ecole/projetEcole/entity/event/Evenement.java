@@ -1,21 +1,20 @@
-package ecole.projetEcole.dto.event;
+package ecole.projetEcole.entity.event;
 
-import ecole.projetEcole.dto.Adresse;
+import ecole.projetEcole.entity.AdresseDto;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Evenement implements Serializable {
 
 
 
     private String intitule;
-    private Adresse lieu;
+    private AdresseDto lieu;
     private String horaireDebut;
     private String horaireFin;
     private String description;
 
-    public Evenement(String intitule, Adresse lieu, String horaireDebut, String horaireFin, String description) {
+    public Evenement(String intitule, AdresseDto lieu, String horaireDebut, String horaireFin, String description) {
         this.intitule = intitule;
         this.lieu = lieu;
         this.horaireDebut = horaireDebut;
@@ -31,11 +30,11 @@ public class Evenement implements Serializable {
         this.intitule = intitule;
     }
 
-    public Adresse getLieu() {
+    public AdresseDto getLieu() {
         return lieu;
     }
 
-    public void setLieu(Adresse lieu) {
+    public void setLieu(AdresseDto lieu) {
         this.lieu = lieu;
     }
 

@@ -1,4 +1,4 @@
-package ecole.projetEcole.dto.ecole;
+package ecole.projetEcole.entity.ecole;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -9,11 +9,12 @@ public class EcoleDto implements Serializable {
     private String nom;
     private int nbEtudiants;
     private int adresse;
+    private String specialite;
 
     /*
     private Personne directeur;
     private Personne respEnt;
-    private String specialite;
+
     private List<Formation> cycle;
 
 
@@ -22,10 +23,19 @@ public class EcoleDto implements Serializable {
 
     }
 
-    public EcoleDto(String nom, int nbEtudiants, int adresse) {
+    public EcoleDto(String nom, int nbEtudiants, int adresse, String specialite) {
         this.nom = nom;
         this.nbEtudiants = nbEtudiants;
         this.adresse = adresse;
+        this.specialite = specialite;
+    }
+
+    public String getSpecialite() {
+        return specialite;
+    }
+
+    public void setSpecialite(String specialite) {
+        this.specialite = specialite;
     }
 
     public String getNom() {
@@ -58,6 +68,7 @@ public class EcoleDto implements Serializable {
                 "nom='" + nom + '\'' +
                 ", nbEtudiants=" + nbEtudiants +
                 ", adresse=" + adresse +
+                ", specialite='" + specialite + '\'' +
                 '}';
     }
 
@@ -68,11 +79,12 @@ public class EcoleDto implements Serializable {
         EcoleDto ecoleDto = (EcoleDto) o;
         return nbEtudiants == ecoleDto.nbEtudiants &&
                 adresse == ecoleDto.adresse &&
-                Objects.equals(nom, ecoleDto.nom);
+                Objects.equals(nom, ecoleDto.nom) &&
+                Objects.equals(specialite, ecoleDto.specialite);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nom, nbEtudiants, adresse);
+        return Objects.hash(nom, nbEtudiants, adresse, specialite);
     }
 }

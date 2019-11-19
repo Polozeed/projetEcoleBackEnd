@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Ecole {
+public class EcoleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +18,17 @@ public class Ecole {
 
     @Column(name = "id_adresse")
     private int adresse;
+
+    @Column(name = "specialite")
+    private String specialite;
+
+    public String getSpecialite() {
+        return specialite;
+    }
+
+    public void setSpecialite(String specialite) {
+        this.specialite = specialite;
+    }
 
     public int getIdEcole() {
         return idEcole;
@@ -58,6 +69,7 @@ public class Ecole {
                 ", nom='" + nom + '\'' +
                 ", nbEtudiants=" + nbEtudiants +
                 ", adresse=" + adresse +
+                ", specialite='" + specialite + '\'' +
                 '}';
     }
 
@@ -65,15 +77,16 @@ public class Ecole {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Ecole ecole = (Ecole) o;
+        EcoleEntity ecole = (EcoleEntity) o;
         return idEcole == ecole.idEcole &&
                 nbEtudiants == ecole.nbEtudiants &&
                 adresse == ecole.adresse &&
-                Objects.equals(nom, ecole.nom);
+                Objects.equals(nom, ecole.nom) &&
+                Objects.equals(specialite, ecole.specialite);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idEcole, nom, nbEtudiants, adresse);
+        return Objects.hash(idEcole, nom, nbEtudiants, adresse, specialite);
     }
 }

@@ -1,8 +1,9 @@
-package ecole.projetEcole.dto;
+package ecole.projetEcole.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 
-public class Adresse implements Serializable {
+public class AdresseDto implements Serializable {
 
 
     private String nomRue;
@@ -13,7 +14,11 @@ public class Adresse implements Serializable {
     private String pays;
     private String gps;
 
-    public Adresse(String nomRue, int numRue, String nomVille, String codePostal, String departement, String pays, String gps) {
+    public AdresseDto(){
+
+    }
+
+    public AdresseDto(String nomRue, int numRue, String nomVille, String codePostal, String departement, String pays, String gps) {
         this.nomRue = nomRue;
         this.numRue = numRue;
         this.nomVille = nomVille;
@@ -90,5 +95,25 @@ public class Adresse implements Serializable {
                 ", pays='" + pays + '\'' +
                 ", gps='" + gps + '\'' +
                 '}';
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AdresseDto that = (AdresseDto) o;
+        return numRue == that.numRue &&
+                Objects.equals(nomRue, that.nomRue) &&
+                Objects.equals(nomVille, that.nomVille) &&
+                Objects.equals(codePostal, that.codePostal) &&
+                Objects.equals(departement, that.departement) &&
+                Objects.equals(pays, that.pays) &&
+                Objects.equals(gps, that.gps);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nomRue, numRue, nomVille, codePostal, departement, pays, gps);
     }
 }

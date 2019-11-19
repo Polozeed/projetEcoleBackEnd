@@ -1,7 +1,7 @@
 package ecole.projetEcole.controller;
 
-import ecole.projetEcole.dto.ecole.EcoleDto;
-import ecole.projetEcole.service.ServiceEcoleTest;
+import ecole.projetEcole.entity.ecole.EcoleDto;
+import ecole.projetEcole.service.ServiceEcole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class EcoleController {
 
     @Autowired
-    ServiceEcoleTest serviceEcoleTest;
+    ServiceEcole serviceEcoleTest;
 
    @GetMapping( "/ville")
     public String getTestVille() {
