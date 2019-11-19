@@ -1,32 +1,31 @@
 package ecole.projetEcole.dto.event;
 
 import ecole.projetEcole.dto.Adresse;
-import ecole.projetEcole.dto.ecole.Ecole;
+import ecole.projetEcole.dto.ecole.EcoleDto;
 import ecole.projetEcole.dto.ecole.Formation;
 import ecole.projetEcole.dto.ecole.Promotion;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class EventEcole extends Evenement implements Serializable {
 
 
-    private Ecole ecole;
+    private EcoleDto ecole;
     private Formation formation;
     private Promotion promotion;
 
-    public EventEcole(String intitule, Adresse lieu, String horaireDebut, String horaireFin, String description, Ecole ecole, Formation formation, Promotion promotion) {
+    public EventEcole(String intitule, Adresse lieu, String horaireDebut, String horaireFin, String description, EcoleDto ecole, Formation formation, Promotion promotion) {
         super(intitule, lieu, horaireDebut, horaireFin, description);
         this.ecole = ecole;
         this.formation = formation;
         this.promotion = promotion;
     }
 
-    public Ecole getEcole() {
+    public EcoleDto getEcole() {
         return ecole;
     }
 
-    public void setEcole(Ecole ecole) {
+    public void setEcole(EcoleDto ecole) {
         this.ecole = ecole;
     }
 

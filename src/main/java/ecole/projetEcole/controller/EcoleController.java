@@ -1,16 +1,39 @@
 package ecole.projetEcole.controller;
 
+import ecole.projetEcole.dto.ecole.EcoleDto;
+import ecole.projetEcole.service.ServiceEcoleTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-@RestController
+@Controller
 public class EcoleController {
 
+    @Autowired
+    ServiceEcoleTest serviceEcoleTest;
 
-
-    @GetMapping("test")
-    public String testEcole() {
+   @GetMapping( "/ville")
+    public String getTestVille() {
+       serviceEcoleTest.getClass();
         System.out.println("je suis dans le controller");
-        return "salut";
+        return "ville";
     }
+
+
+    @PostMapping("/ecole")
+    public ResponseEntity<String> postEcole(@RequestBody EcoleDto ecole) {
+
+        EcoleDto ecolereturn = serviceEcoleTest.addecole(ecole);
+        if (ecole.equals(ecolereturn)) {
+            return new ResponseEntity<>( "Insertion OK : " + ecole.toString(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Erreur", HttpStatus.CONFLICT);
+        }
+
+    }
+
 }
