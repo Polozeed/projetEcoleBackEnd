@@ -1,4 +1,4 @@
-package ecole.projetEcole.entity.personne;
+package ecole.projetEcole.dto.personne;
 
 import java.io.Serializable;
 

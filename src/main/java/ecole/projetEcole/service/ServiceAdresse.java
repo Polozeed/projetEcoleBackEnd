@@ -1,7 +1,7 @@
 package ecole.projetEcole.service;
 
-import ecole.projetEcole.dao.AdresseEntity;
-import ecole.projetEcole.entity.AdresseDto;
+import ecole.projetEcole.entity.AdresseEntity;
+import ecole.projetEcole.dto.AdresseDto;
 import ecole.projetEcole.mapper.AdresseMapper;
 import ecole.projetEcole.repository.AdresseRepository;
 import org.springframework.beans.factory.annotation.Autowired;

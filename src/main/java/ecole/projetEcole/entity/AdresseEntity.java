@@ -1,4 +1,4 @@
-package ecole.projetEcole.dao;
+package ecole.projetEcole.entity;
 
 import javax.persistence.*;
 

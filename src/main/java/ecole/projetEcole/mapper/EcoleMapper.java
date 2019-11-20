@@ -1,7 +1,7 @@
 package ecole.projetEcole.mapper;
 
-import ecole.projetEcole.dao.EcoleEntity;
-import ecole.projetEcole.entity.ecole.EcoleDto;
+import ecole.projetEcole.entity.EcoleEntity;
+import ecole.projetEcole.dto.ecole.EcoleDto;
 
 public class EcoleMapper {
 

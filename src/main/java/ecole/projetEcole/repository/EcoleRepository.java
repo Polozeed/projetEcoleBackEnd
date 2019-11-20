@@ -1,6 +1,6 @@
 package ecole.projetEcole.repository;
 
-import ecole.projetEcole.dao.EcoleEntity;
+import ecole.projetEcole.entity.EcoleEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

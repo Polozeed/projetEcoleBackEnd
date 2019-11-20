@@ -1,10 +1,11 @@
-package ecole.projetEcole.entity.event;
+package ecole.projetEcole.dto.event;
 
-import ecole.projetEcole.entity.AdresseDto;
+import ecole.projetEcole.dto.AdresseDto;
 
 import java.io.Serializable;
+import java.util.Objects;
 
-public class Evenement implements Serializable {
+public class EvenementDto implements Serializable {
 
 
 
@@ -14,7 +15,11 @@ public class Evenement implements Serializable {
     private String horaireFin;
     private String description;
 
-    public Evenement(String intitule, AdresseDto lieu, String horaireDebut, String horaireFin, String description) {
+    public EvenementDto(){
+
+    }
+
+    public EvenementDto(String intitule, AdresseDto lieu, String horaireDebut, String horaireFin, String description) {
         this.intitule = intitule;
         this.lieu = lieu;
         this.horaireDebut = horaireDebut;
@@ -71,5 +76,22 @@ public class Evenement implements Serializable {
                 ", horaireFin='" + horaireFin + '\'' +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EvenementDto that = (EvenementDto) o;
+        return Objects.equals(intitule, that.intitule) &&
+                Objects.equals(lieu, that.lieu) &&
+                Objects.equals(horaireDebut, that.horaireDebut) &&
+                Objects.equals(horaireFin, that.horaireFin) &&
+                Objects.equals(description, that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(intitule, lieu, horaireDebut, horaireFin, description);
     }
 }

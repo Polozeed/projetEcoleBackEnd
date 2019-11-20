@@ -1,6 +1,6 @@
 package ecole.projetEcole.controller;
 
-import ecole.projetEcole.entity.ecole.EcoleDto;
+import ecole.projetEcole.dto.ecole.EcoleDto;
 import ecole.projetEcole.service.ServiceEcole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

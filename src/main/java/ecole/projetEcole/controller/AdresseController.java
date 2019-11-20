@@ -1,6 +1,6 @@
 package ecole.projetEcole.controller;
 
-import ecole.projetEcole.entity.AdresseDto;
+import ecole.projetEcole.dto.AdresseDto;
 import ecole.projetEcole.service.ServiceAdresse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
