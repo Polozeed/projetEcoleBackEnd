@@ -1,31 +1,29 @@
 package ecole.projetEcole.dto.event;
 
 import ecole.projetEcole.dto.AdresseDto;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 
 @Data
+@EqualsAndHashCode
+
 public class EvenementDto implements Serializable {
 
-
-
+    private int id;
     private String intitule;
-    private AdresseDto lieu;
+    private AdresseDto adresse;
     private String horaireDebut;
     private String horaireFin;
     private String description;
+    private String couleur;
+    private Boolean eventEcole;
 
     public EvenementDto(){
 
     }
 
-    public EvenementDto(String intitule, AdresseDto lieu, String horaireDebut, String horaireFin, String description) {
-        this.intitule = intitule;
-        this.lieu = lieu;
-        this.horaireDebut = horaireDebut;
-        this.horaireFin = horaireFin;
-        this.description = description;
-    }
+
 
 }

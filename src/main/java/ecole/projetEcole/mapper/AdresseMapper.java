@@ -1,37 +1,21 @@
 package ecole.projetEcole.mapper;
 
-import ecole.projetEcole.entity.AdresseEntity;
 import ecole.projetEcole.dto.AdresseDto;
+import ecole.projetEcole.entity.AdresseEntity;
+import org.modelmapper.ModelMapper;
 
 public class AdresseMapper {
 
-
-    public static AdresseEntity dtoToDao(AdresseDto adresseDto) {
-        AdresseEntity adresseDao = new AdresseEntity();
-
-        adresseDao.setNomVille(adresseDto.getNomVille());
-        adresseDao.setCodePostal(adresseDto.getCodePostal());
-        adresseDao.setDepartement(adresseDto.getDepartement());
-        adresseDao.setGps(adresseDto.getGps());
-        adresseDao.setNomRue(adresseDto.getNomRue());
-        adresseDao.setNumRue(adresseDto.getNumRue());
-        adresseDao.setPays(adresseDto.getPays());
-        return adresseDao;
+    public static AdresseDto convertToDto(AdresseEntity adresseEntity) {
+        ModelMapper modelMapper = new ModelMapper();
+        AdresseDto adresseDto =  modelMapper.map(adresseEntity, AdresseDto.class);
+        return adresseDto;
     }
 
-    public static AdresseDto daoToDto(AdresseEntity adresseEntity) {
-        AdresseDto adresseDto = new AdresseDto();
-
-        adresseDto.setNomVille(adresseEntity.getNomVille());
-        adresseDto.setCodePostal(adresseEntity.getCodePostal());
-        adresseDto.setDepartement(adresseEntity.getDepartement());
-        adresseDto.setGps(adresseEntity.getGps());
-        adresseDto.setNomRue(adresseEntity.getNomRue());
-        adresseDto.setNumRue(adresseEntity.getNumRue());
-        adresseDto.setPays(adresseEntity.getPays());
-
-
-        return adresseDto;
+    public static AdresseEntity convertToEntity(AdresseDto adresseDto) {
+        ModelMapper modelMapper = new ModelMapper();
+        AdresseEntity adresseEntity =  modelMapper.map(adresseDto, AdresseEntity.class);
+        return adresseEntity;
     }
 }
 

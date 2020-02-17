@@ -1,37 +1,20 @@
 package ecole.projetEcole.dto.ecole;
 
-import lombok.*;
+import ecole.projetEcole.dto.AdresseDto;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 
 @Data
+@EqualsAndHashCode
 public class EcoleDto implements Serializable {
 
-
+    private int idEcole;
     private String nom;
     private int nbEtudiants;
-    private int adresse;
+    private AdresseDto adresse;
     private String specialite;
-
-    /*
-    private Personne directeur;
-    private Personne respEnt;
-
-    private List<Formation> cycle;
-
-
-     */
-    public EcoleDto() {
-
-    }
-
-    public EcoleDto(String nom, int nbEtudiants, int adresse, String specialite) {
-        this.nom = nom;
-        this.nbEtudiants = nbEtudiants;
-        this.adresse = adresse;
-        this.specialite = specialite;
-    }
-
-
+    //private Set<FormationDto> formations;
 
 }

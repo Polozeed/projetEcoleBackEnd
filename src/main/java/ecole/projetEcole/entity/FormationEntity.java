@@ -1,78 +1,72 @@
 package ecole.projetEcole.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
+import java.util.Objects;
+import java.util.Set;
+
 
 @Entity
-@Table(name = "formation", schema = "Projet_Ecole", catalog = "")
+@Table(name = "formation", schema = "projetecole", catalog = "")
+@Data
 public class FormationEntity {
 
-
-    private int idFormation;
-    private String intitule;
-    private int dureeEtude;
-    private int idEcole;
-
     @Id
-    @Column(name = "id_formation")
-    public int getIdFormation() {
-        return idFormation;
-    }
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int idFormation;
 
-    public void setIdFormation(int idFormation) {
-        this.idFormation = idFormation;
-    }
-
-    @Basic
     @Column(name = "intitule")
-    public String getIntitule() {
-        return intitule;
-    }
+    private String intitule;
 
-    public void setIntitule(String intitule) {
-        this.intitule = intitule;
-    }
-
-    @Basic
     @Column(name = "duree_etude")
-    public int getDureeEtude() {
-        return dureeEtude;
+    private int dureeEtude;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "formation_ecole",
+            joinColumns = @JoinColumn(name = "id_formation"),
+            inverseJoinColumns = @JoinColumn(name = "id_ecole"))
+    private Set<EcoleEntity> ecoles;
+
+
+    public void addEcole(EcoleEntity ecoleEntity) {
+        ecoles.add(ecoleEntity);
+        ecoleEntity.getFormations().add(this);
     }
 
-    public void setDureeEtude(int dureeEtude) {
-        this.dureeEtude = dureeEtude;
+    public void removeEcole(EcoleEntity ecoleEntity) {
+        ecoles.remove(ecoleEntity);
+        ecoleEntity.getFormations().remove(this);
     }
 
-    @Basic
-    @Column(name = "id_ecole")
-    public int getIdEcole() {
-        return idEcole;
-    }
-
-    public void setIdEcole(int idEcole) {
-        this.idEcole = idEcole;
+    @Override
+    public String toString() {
+        return "FormationEntity{" +
+                "idFormation=" + idFormation +
+                ", intitule='" + intitule + '\'' +
+                ", dureeEtude=" + dureeEtude +
+                ", ecoleEntitySet=" + ecoles +
+                '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         FormationEntity that = (FormationEntity) o;
-
-        if (idFormation != that.idFormation) return false;
-        if (dureeEtude != that.dureeEtude) return false;
-        if (idEcole != that.idEcole) return false;
-        if (intitule != null ? !intitule.equals(that.intitule) : that.intitule != null) return false;
-
-        return true;
+        return idFormation == that.idFormation &&
+                dureeEtude == that.dureeEtude &&
+                Objects.equals(intitule, that.intitule) &&
+                Objects.equals(ecoles, that.ecoles);
     }
 
     @Override
     public int hashCode() {
-        int result = idFormation;
-        result = 31 * result + (intitule != null ? intitule.hashCode() : 0);
-        result = 31 * result + dureeEtude;
-        result = 31 * result + idEcole;
-        return result;
+        return Objects.hash(idFormation, intitule, dureeEtude, ecoles);
     }
 }

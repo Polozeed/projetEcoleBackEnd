@@ -17,6 +17,6 @@ public class DiplomeDto implements Serializable {
     private int idDiplome;
     private String nomDiplome;
     private String commentaire;
-    private int idFormation;
+    private FormationDto formation;
 
 }

@@ -1,23 +1,47 @@
 package ecole.projetEcole.entity;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 
 @Entity
-@Table(name = "adresse", schema = "Projet_Ecole", catalog = "")
+@Table(name = "adresse", schema = "Projet_Ecole")
+@Setter
+@Getter
+@EqualsAndHashCode
+@Data
 public class AdresseEntity {
-
-    private int idAdresse;
-    private String nomRue;
-    private int numRue;
-    private String nomVille;
-    private String codePostal;
-    private String departement;
-    private String pays;
-    private String gps;
 
     @Id
     @Column(name = "id_adresse")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idAdresse;
+
+    @Column(name = "nom_rue")
+    private String nomRue;
+
+    @Column(name = "num_rue")
+    private int numRue;
+
+    @Column(name = "nom_ville")
+    private String nomVille;
+
+    @Column(name = "code_postal")
+    private String codePostal;
+
+    @Column(name = "departement")
+    private String departement;
+
+    @Column(name = "pays")
+    private String pays;
+
+    @Column(name = "gps")
+    private String gps;
+
     public int getIdAdresse() {
         return idAdresse;
     }
@@ -26,8 +50,6 @@ public class AdresseEntity {
         this.idAdresse = idAdresse;
     }
 
-    @Basic
-    @Column(name = "nom_rue")
     public String getNomRue() {
         return nomRue;
     }
@@ -36,8 +58,6 @@ public class AdresseEntity {
         this.nomRue = nomRue;
     }
 
-    @Basic
-    @Column(name = "num_rue")
     public int getNumRue() {
         return numRue;
     }
@@ -46,8 +66,6 @@ public class AdresseEntity {
         this.numRue = numRue;
     }
 
-    @Basic
-    @Column(name = "nom_ville")
     public String getNomVille() {
         return nomVille;
     }
@@ -56,8 +74,6 @@ public class AdresseEntity {
         this.nomVille = nomVille;
     }
 
-    @Basic
-    @Column(name = "code_postal")
     public String getCodePostal() {
         return codePostal;
     }
@@ -66,8 +82,6 @@ public class AdresseEntity {
         this.codePostal = codePostal;
     }
 
-    @Basic
-    @Column(name = "departement")
     public String getDepartement() {
         return departement;
     }
@@ -76,8 +90,6 @@ public class AdresseEntity {
         this.departement = departement;
     }
 
-    @Basic
-    @Column(name = "pays")
     public String getPays() {
         return pays;
     }
@@ -86,45 +98,11 @@ public class AdresseEntity {
         this.pays = pays;
     }
 
-    @Basic
-    @Column(name = "gps")
     public String getGps() {
         return gps;
     }
 
     public void setGps(String gps) {
         this.gps = gps;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        AdresseEntity that = (AdresseEntity) o;
-
-        if (idAdresse != that.idAdresse) return false;
-        if (numRue != that.numRue) return false;
-        if (nomRue != null ? !nomRue.equals(that.nomRue) : that.nomRue != null) return false;
-        if (nomVille != null ? !nomVille.equals(that.nomVille) : that.nomVille != null) return false;
-        if (codePostal != null ? !codePostal.equals(that.codePostal) : that.codePostal != null) return false;
-        if (departement != null ? !departement.equals(that.departement) : that.departement != null) return false;
-        if (pays != null ? !pays.equals(that.pays) : that.pays != null) return false;
-        if (gps != null ? !gps.equals(that.gps) : that.gps != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = idAdresse;
-        result = 31 * result + (nomRue != null ? nomRue.hashCode() : 0);
-        result = 31 * result + numRue;
-        result = 31 * result + (nomVille != null ? nomVille.hashCode() : 0);
-        result = 31 * result + (codePostal != null ? codePostal.hashCode() : 0);
-        result = 31 * result + (departement != null ? departement.hashCode() : 0);
-        result = 31 * result + (pays != null ? pays.hashCode() : 0);
-        result = 31 * result + (gps != null ? gps.hashCode() : 0);
-        return result;
     }
 }

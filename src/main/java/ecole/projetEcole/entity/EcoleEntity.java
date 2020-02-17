@@ -1,10 +1,16 @@
 package ecole.projetEcole.entity;
 
+import lombok.Data;
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name = "ecole", schema = "Projet_Ecole", catalog = "")
+@Table(name = "ecole", schema = "projetecole", catalog = "")
+@Data
 public class EcoleEntity {
 
     @Id
@@ -13,22 +19,47 @@ public class EcoleEntity {
     private int idEcole;
 
     @Column(name = "nom")
+    @NaturalId(mutable = true)
     private String nom;
+
     @Column(name = "nb_etudiant")
     private int nbEtudiants;
 
-    @Column(name = "id_adresse")
-    private int adresse;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_adresse")
+    private AdresseEntity adresse;
 
     @Column(name = "specialite")
     private String specialite;
 
-    public String getSpecialite() {
-        return specialite;
+    @ManyToMany(mappedBy = "ecoles")
+    private Set<FormationEntity> formations = new HashSet<>();
+
+
+    public Set<FormationEntity> getFormations() {
+        return formations;
     }
 
-    public void setSpecialite(String specialite) {
-        this.specialite = specialite;
+    public void setFormations(Set<FormationEntity> formations) {
+        this.formations = formations;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EcoleEntity that = (EcoleEntity) o;
+        return idEcole == that.idEcole &&
+                nbEtudiants == that.nbEtudiants &&
+                Objects.equals(nom, that.nom) &&
+                Objects.equals(adresse, that.adresse) &&
+                Objects.equals(specialite, that.specialite) &&
+                Objects.equals(formations, that.formations);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idEcole, nom, nbEtudiants, adresse, specialite, formations);
     }
 
     public int getIdEcole() {
@@ -55,39 +86,19 @@ public class EcoleEntity {
         this.nbEtudiants = nbEtudiants;
     }
 
-    public int getAdresse() {
+    public AdresseEntity getAdresse() {
         return adresse;
     }
 
-    public void setAdresse(int adresse) {
+    public void setAdresse(AdresseEntity adresse) {
         this.adresse = adresse;
     }
 
-    @Override
-    public String toString() {
-        return "Ecole{" +
-                "idEcole=" + idEcole +
-                ", nom='" + nom + '\'' +
-                ", nbEtudiants=" + nbEtudiants +
-                ", adresse=" + adresse +
-                ", specialite='" + specialite + '\'' +
-                '}';
+    public String getSpecialite() {
+        return specialite;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        EcoleEntity ecole = (EcoleEntity) o;
-        return idEcole == ecole.idEcole &&
-                nbEtudiants == ecole.nbEtudiants &&
-                adresse == ecole.adresse &&
-                Objects.equals(nom, ecole.nom) &&
-                Objects.equals(specialite, ecole.specialite);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idEcole, nom, nbEtudiants, adresse, specialite);
+    public void setSpecialite(String specialite) {
+        this.specialite = specialite;
     }
 }

@@ -10,22 +10,19 @@ import org.modelmapper.ModelMapper;
 
 public class PersonneMapper {
 
-    //--------------------------// Convert Personne //--------------------------------
     public static PersonneDto convertToDto(PersonneEntity personneEntity) {
         ModelMapper modelMapper = new ModelMapper();
         PersonneDto personneDto =  modelMapper.map(personneEntity, PersonneDto.class);
-
         return personneDto;
     }
 
     public static PersonneEntity convertToEntity(PersonneDto personnedto) {
         ModelMapper modelMapper = new ModelMapper();
         PersonneEntity personneEntity =  modelMapper.map(personnedto, PersonneEntity.class);
-
         return personneEntity;
     }
 
-    //--------------------------// Convert Contact //-------------------------------
+
     public static ContactDto convertToContactDto(ContactEntity contactEntity) {
         ModelMapper modelMapper = new ModelMapper();
         ContactDto contactDto =  modelMapper.map(contactEntity, ContactDto.class);
@@ -35,11 +32,9 @@ public class PersonneMapper {
     public static ContactEntity convertToContactEntity(ContactDto contactDto) {
         ModelMapper modelMapper = new ModelMapper();
         ContactEntity contactEntity=  modelMapper.map(contactDto, ContactEntity.class);
-
         return contactEntity;
     }
 
-    //--------------------------// Convert Collaborateur //-------------------------------
     public static CollaborateurDto convertToCollaborateurDto(CollaborateurEntity collaborateurEntity) {
         ModelMapper modelMapper = new ModelMapper();
         CollaborateurDto collaborateurDto =  modelMapper.map(collaborateurEntity, CollaborateurDto.class);
@@ -49,8 +44,9 @@ public class PersonneMapper {
     public static CollaborateurEntity convertToCollaborateurEntity(CollaborateurDto collaborateurDto) {
         ModelMapper modelMapper = new ModelMapper();
         CollaborateurEntity collaborateurEntity=  modelMapper.map(collaborateurDto, CollaborateurEntity.class);
-
         return collaborateurEntity;
     }
+
+
 
 }

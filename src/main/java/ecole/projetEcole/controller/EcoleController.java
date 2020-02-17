@@ -6,34 +6,86 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class EcoleController {
 
     @Autowired
-    ServiceEcole serviceEcoleTest;
-
-   @GetMapping( "/ville")
-    public String getTestVille() {
-       serviceEcoleTest.getClass();
-        System.out.println("je suis dans le controller");
-        return "ville";
-    }
+    ServiceEcole serviceEcole;
 
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/ecole")
     public ResponseEntity<String> postEcole(@RequestBody EcoleDto ecole) {
-
-        EcoleDto ecolereturn = serviceEcoleTest.addecole(ecole);
-        if (ecole.equals(ecolereturn)) {
+        EcoleDto ecoleReturn = serviceEcole.addEcole(ecole);
+        if (ecole.equals(ecoleReturn)) {
             return new ResponseEntity<>( "Insertion OK : " + ecole.toString(), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Erreur", HttpStatus.CONFLICT);
+            return new ResponseEntity<>("Erreur", HttpStatus.BAD_REQUEST);
         }
-
     }
+
+    @GetMapping("ecole/{id}")
+    public ResponseEntity<String> rechercheEcoleId(@PathVariable("id") int id){
+        EcoleDto ecoleDto = serviceEcole.rechercheParId(id);
+        return new ResponseEntity<>( ecoleDto.toString(), HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("ecole/nom/{nom}")
+    public ResponseEntity<List<EcoleDto>> rechercheEcoleNom(@PathVariable("nom") String nom){
+        List<EcoleDto> ecoleDtoList = serviceEcole.rechercheParNom(nom);
+        return new ResponseEntity<>( ecoleDtoList, HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("ecole/adresse/{adresse}")
+    public ResponseEntity<List<EcoleDto>> rechercheEcoleParAdresse(@PathVariable("adresse") String adresse){
+        List<EcoleDto> ecoleDtoList;
+        ecoleDtoList = serviceEcole.rechercherParAdresse(adresse);
+        return new ResponseEntity<>( ecoleDtoList, HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("ecole/formation/{formation}")
+    public ResponseEntity<List<EcoleDto>> rechercheEcoleParFormation(@PathVariable("formation") String formation){
+        List<EcoleDto> ecoleDtoList;
+        ecoleDtoList = serviceEcole.rechercherParFormation(formation);
+        return new ResponseEntity<>( ecoleDtoList, HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("ecole/niveauEtude/{niveauEtude}")
+    public ResponseEntity<List<EcoleDto>> rechercheEcoleParNvEtude(@PathVariable("niveauEtude") String etude){
+        List<EcoleDto> ecoleDtoList;
+        ecoleDtoList = serviceEcole.rechercherParNvEtude(etude);
+        return new ResponseEntity<>( ecoleDtoList, HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PutMapping("/ecole/{id}")
+    public ResponseEntity<EcoleDto> modifierEcole(@PathVariable("id") int idEcole, @RequestBody EcoleDto ecoleDto){
+        EcoleDto ecoleDtoReturn;
+        ecoleDtoReturn = serviceEcole.modifierEcole(idEcole, ecoleDto);
+        return new ResponseEntity<>(ecoleDtoReturn , HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @DeleteMapping("/ecole/{id}")
+    public ResponseEntity<String> deleteEcole(@PathVariable("id") int id){
+        serviceEcole.deleteEcole(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/ecole")
+    public ResponseEntity<List<EcoleDto>> listeEcoles(){
+        List<EcoleDto> ecolesDtoList  = serviceEcole.listeEcole();
+        return new ResponseEntity<>(ecolesDtoList,HttpStatus.OK);
+    }
+
 
 }

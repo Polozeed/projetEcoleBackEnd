@@ -3,12 +3,12 @@ package ecole.projetEcole.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
-@Table(name = "promotion", schema = "Projet_Ecole", catalog = "")
+@Table(name = "promotion", schema = "projetecole", catalog = "")
 public class PromotionEntity {
-
 
     @Id
     @Column(name = "id_promotion")
@@ -21,7 +21,9 @@ public class PromotionEntity {
     private String intitule;
 
     @Column(name = "id_formation")
-    private int idFormation;
+
+    @OneToMany
+    private List<FormationEntity> formationEntity;
 
 
 }

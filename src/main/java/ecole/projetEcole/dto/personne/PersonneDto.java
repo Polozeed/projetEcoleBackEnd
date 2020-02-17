@@ -1,13 +1,15 @@
 package ecole.projetEcole.dto.personne;
 
-import lombok.*;
+import ecole.projetEcole.dto.ecole.FormationDto;
+import lombok.Data;
 
 import java.io.Serializable;
 
 
 @Data
-public abstract class PersonneDto implements Serializable {
+public  class PersonneDto implements Serializable {
 
+    private int id;
     private String nom;
     private String prenom;
     private String fonction;
@@ -15,18 +17,8 @@ public abstract class PersonneDto implements Serializable {
     private String numeroTel;
     private String dateNaissance;
     private String commentaire;
-
-    public PersonneDto(){
-    }
-
-
-    public PersonneDto(String nom, String prenom, String fonction, String mail, String numeroTel, String dateNaissance) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.fonction = fonction;
-        this.mail = mail;
-        this.numeroTel = numeroTel;
-        this.dateNaissance = dateNaissance;
-    }
+    //private List<FormationDto> formations;
+    private FormationDto formations;
+    private String type;
 
 }
