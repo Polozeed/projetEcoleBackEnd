@@ -30,7 +30,8 @@ public interface PersonneRepository extends CrudRepository<PersonneEntity, Integ
                 "WHERE `formation`.`intitule` LIKE '%' :recherche '%';",nativeQuery = true)
         List<PersonneEntity> findByIntituleFormation(@Param("recherche") String recherche);
 
-
+        @Query(value = "SELECT * FROM `personne` LIMIT   :limit  OFFSET :offset ;", nativeQuery = true)
+        List<PersonneEntity> findAllByPage(@Param("limit") int limit, @Param("offset") int offset );
 
 
 

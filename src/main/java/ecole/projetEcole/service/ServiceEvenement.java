@@ -56,6 +56,14 @@ public class ServiceEvenement {
         return  evenementDtoListReturn;
     }
 
+    public List<EvenementDto> listEvenementPourChargementParPage(int limit, int offset){
+        List<EvenementDto> evenementDtoListReturn = new ArrayList<>();
+        List<EvenementEntity> evenementEntityList =  evenementRepository.findAllByPage(limit, offset);
+        for (EvenementEntity event:evenementEntityList) {
+            evenementDtoListReturn.add(EvenementMapper.convertToDto(event));
+        }
+        return  evenementDtoListReturn;
+    }
 
 
     public EvenementDto modifierEvenement(int id, EvenementDto evenementDto){

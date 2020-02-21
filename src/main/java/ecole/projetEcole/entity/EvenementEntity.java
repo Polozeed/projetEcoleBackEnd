@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -25,10 +26,10 @@ public class EvenementEntity {
     private AdresseEntity adresse;
 
     @Column(name = "horaire_debut")
-    private String horaireDebut;
+    private Date horaireDebut;
 
     @Column(name = "horaire_fin")
-    private String horaireFin;
+    private Date horaireFin;
 
     @Column(name = "description")
     private String description;
@@ -85,19 +86,19 @@ public class EvenementEntity {
         this.adresse = adresseEntity;
     }
 
-    public String getHoraireDebut() {
+    public Date getHoraireDebut() {
         return horaireDebut;
     }
 
-    public void setHoraireDebut(String horaireDebut) {
+    public void setHoraireDebut(Date horaireDebut) {
         this.horaireDebut = horaireDebut;
     }
 
-    public String getHoraireFin() {
+    public Date getHoraireFin() {
         return horaireFin;
     }
 
-    public void setHoraireFin(String horaireFin) {
+    public void setHoraireFin(Date horaireFin) {
         this.horaireFin = horaireFin;
     }
 

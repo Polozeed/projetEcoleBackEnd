@@ -1,6 +1,5 @@
 package ecole.projetEcole.repository;
 
-import ecole.projetEcole.entity.EcoleEntity;
 import ecole.projetEcole.entity.EvenementEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -19,9 +18,10 @@ public interface EvenementRepository extends CrudRepository<EvenementEntity, Int
 
     List<EvenementEntity> findByHoraireDebutContainsOrHoraireFinContains(String dateD,String dateF);
 
-    @Query(value = "SELECT * FROM `evenement` LIMIT  '%' :limit '%' OFFSET '%' :offset '%';", nativeQuery = true)
-    List<EcoleEntity> findAllByPage(@Param("limit") int limit,@Param("offset") int offset );
+    @Query(value = "SELECT * FROM `evenement` LIMIT   :limit  OFFSET :offset ;", nativeQuery = true)
+    List<EvenementEntity> findAllByPage(@Param("limit") int limit,@Param("offset") int offset );
 
-
+    @Query(value = "SELECT COUNT(*) as count FROM `evenement` GROUP BY intitule ORDER BY count DESC;", nativeQuery = true)
+    List<Integer> findNbOccurenceEvent();
 
 }

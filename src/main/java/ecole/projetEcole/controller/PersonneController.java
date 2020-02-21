@@ -106,6 +106,12 @@ public class PersonneController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/collabPage/{limit}/{offset}")
+    public ResponseEntity<List<PersonneDto>> listeCollabParPage(@PathVariable("limit")int limit, @PathVariable("offset")int offset){
+        List<PersonneDto> collabDtoList  =  servicePersonne.listCollabChargementParPage(limit,offset);
+        return new ResponseEntity<>(collabDtoList,HttpStatus.OK);
+    }
 
 
 }

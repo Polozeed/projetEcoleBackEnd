@@ -2,6 +2,7 @@ package ecole.projetEcole.controller;
 
 
 import ecole.projetEcole.dto.event.EvenementDto;
+import ecole.projetEcole.repository.EvenementRepository;
 import ecole.projetEcole.service.ServiceEvenement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,8 @@ import java.util.List;
 @Controller
 public class EvenementController {
 
+    @Autowired
+    EvenementRepository evenementRepository;
     @Autowired
     ServiceEvenement serviceEvenement;
 
@@ -74,11 +77,21 @@ public class EvenementController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/event")
-    public ResponseEntity<List<EvenementDto>> listeEvenementParPage(){
-        List<EvenementDto> eventDtoList  = serviceEvenement.listEvenement();
+    @GetMapping("/eventPage/{limit}/{offset}")
+    public ResponseEntity<List<EvenementDto>> listeEvenementParPage(@PathVariable("limit")int limit,@PathVariable("offset")int offset){
+        List<EvenementDto> eventDtoList  = serviceEvenement.listEvenementPourChargementParPage(limit,offset);
         return new ResponseEntity<>(eventDtoList,HttpStatus.OK);
     }
-
+    // Test recuperation occurence Evenement en base
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/nbEvenement")
+    public ResponseEntity<Integer> nbEvenement(){
+        int compt = 0;
+        List<Integer> valeur  = evenementRepository.findNbOccurenceEvent();
+        for (Integer val: valeur ){
+            compt = compt + 1;
+        }
+        return new ResponseEntity<>(compt,HttpStatus.OK);
+    }
 
 }

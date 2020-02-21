@@ -134,4 +134,13 @@ public class ServicePersonne {
         }
         return personneDtoList;
     }
+
+    public List<PersonneDto> listCollabChargementParPage(int limit, int offset){
+        List<PersonneDto> collabDtoListReturn = new ArrayList<>();
+        List<PersonneEntity> collabEntityList =  personneRepository.findAllByPage(limit, offset);
+        for (PersonneEntity collab: collabEntityList) {
+            collabDtoListReturn.add(PersonneMapper.convertToDto(collab));
+        }
+        return  collabDtoListReturn;
+    }
 }
