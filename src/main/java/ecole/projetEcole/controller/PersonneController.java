@@ -3,6 +3,7 @@ package ecole.projetEcole.controller;
 import ecole.projetEcole.dto.personne.CollaborateurDto;
 import ecole.projetEcole.dto.personne.ContactDto;
 import ecole.projetEcole.dto.personne.PersonneDto;
+import ecole.projetEcole.repository.PersonneRepository;
 import ecole.projetEcole.service.ServicePersonne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,8 @@ public class PersonneController {
 
     @Autowired
     ServicePersonne servicePersonne;
+    @Autowired
+    PersonneRepository personneRepository;
 
 
     @PostMapping("/personne")
@@ -38,13 +41,10 @@ public class PersonneController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/collaborateur")
-    public ResponseEntity<String> postCollaborateur(@RequestBody CollaborateurDto collaborateurDto) {
+    public ResponseEntity<CollaborateurDto> postCollaborateur(@RequestBody CollaborateurDto collaborateurDto) {
         CollaborateurDto collaborateurDtoReturn = servicePersonne.addCollaborateur(collaborateurDto);
-        if (collaborateurDto.equals(collaborateurDtoReturn)) {
-            return new ResponseEntity<>("Insertion OK : " + collaborateurDto.toString(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Erreur", HttpStatus.CONFLICT);
-        }
+        return new ResponseEntity<>( collaborateurDtoReturn, HttpStatus.OK);
+
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
@@ -111,6 +111,18 @@ public class PersonneController {
     public ResponseEntity<List<PersonneDto>> listeCollabParPage(@PathVariable("limit")int limit, @PathVariable("offset")int offset){
         List<PersonneDto> collabDtoList  =  servicePersonne.listCollabChargementParPage(limit,offset);
         return new ResponseEntity<>(collabDtoList,HttpStatus.OK);
+    }
+
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/nbCollabs")
+    public ResponseEntity<Integer> nbCollabs(){
+        int compt = 0;
+        List<Integer> valeur  = personneRepository.findNbOccurenceCollabs();
+        for (Integer val: valeur ){
+            compt = compt + 1;
+        }
+        return new ResponseEntity<>(compt,HttpStatus.OK);
     }
 
 

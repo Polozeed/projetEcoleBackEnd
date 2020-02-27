@@ -15,7 +15,8 @@ public class EvenementEntity {
 
     @Id
     @Column(name = "id_event_ecole")
-    private int idEventEcole;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(name = "intitule")
     private String intitule;
@@ -63,11 +64,11 @@ public class EvenementEntity {
     }
 
     public int getIdEventEcole() {
-        return idEventEcole;
+        return id;
     }
 
-    public void setIdEventEcole(int idEventEcole) {
-        this.idEventEcole = idEventEcole;
+    public void setIdEventEcole(int id) {
+        this.id = id;
     }
 
     public String getIntitule() {
@@ -139,7 +140,7 @@ public class EvenementEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EvenementEntity that = (EvenementEntity) o;
-        return idEventEcole == that.idEventEcole &&
+        return id == that.id &&
                 Objects.equals(intitule, that.intitule) &&
                 Objects.equals(adresse, that.adresse) &&
                 Objects.equals(horaireDebut, that.horaireDebut) &&
@@ -153,6 +154,6 @@ public class EvenementEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(idEventEcole, intitule, adresse, horaireDebut, horaireFin, description, formationEntity, ecoleEntity, eventEcole, couleur);
+        return Objects.hash(id, intitule, adresse, horaireDebut, horaireFin, description, formationEntity, ecoleEntity, eventEcole, couleur);
     }
 }

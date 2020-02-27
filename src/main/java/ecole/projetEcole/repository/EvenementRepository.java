@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface EvenementRepository extends CrudRepository<EvenementEntity, Integer> {
 
-
+    EvenementEntity save(EvenementEntity evenementEntity);
 
     List<EvenementEntity> findByIntitule(String intitule);
 

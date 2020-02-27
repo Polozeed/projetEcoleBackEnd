@@ -24,11 +24,7 @@ public class EvenementController {
     @PostMapping("/evenement")
     public ResponseEntity<EvenementDto> postEvenement(@RequestBody EvenementDto evenementDto) {
         EvenementDto evenementDtoReturn = serviceEvenement.addEvenement(evenementDto);
-        if (evenementDto.equals(evenementDtoReturn)) {
-            return new ResponseEntity<>( evenementDto, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(evenementDto, HttpStatus.CONFLICT);
-        }
+        return new ResponseEntity<>( evenementDtoReturn, HttpStatus.OK);
     }
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/evenement/{id}")

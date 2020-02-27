@@ -33,6 +33,9 @@ public interface PersonneRepository extends CrudRepository<PersonneEntity, Integ
         @Query(value = "SELECT * FROM `personne` LIMIT   :limit  OFFSET :offset ;", nativeQuery = true)
         List<PersonneEntity> findAllByPage(@Param("limit") int limit, @Param("offset") int offset );
 
+        @Query(value = "SELECT COUNT(*) as count FROM `personne` GROUP BY id_personne ORDER BY count DESC;", nativeQuery = true)
+        List<Integer> findNbOccurenceCollabs();
+
 
 
 

@@ -13,6 +13,7 @@ public class PersonneEntity {
 
     @Id
     @Column(name = "id_personne")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPersonne;
 
     @Column(name = "nom")
@@ -36,12 +37,9 @@ public class PersonneEntity {
     @Column(name = "commentaire")
     private String commentaire;
 
-/*
-    @Column(name = "id_formation")
-    @OneToMany
-    private List<FormationEntity> formationEntity;
+    @Column(name = "TYPE_PERSONNE", insertable = false, updatable = false)
+    private String type;
 
- */
     @Column(name = "id_formation")
     private Integer formationEntity;
 
@@ -50,6 +48,7 @@ public class PersonneEntity {
 
     @Column(name = "equipe")
     private String equipe;
+
 
     public int getIdPersonne() {
         return idPersonne;
