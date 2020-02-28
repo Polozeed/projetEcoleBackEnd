@@ -42,4 +42,11 @@ public interface EcoleRepository extends CrudRepository<EcoleEntity, Integer> {
             "         LEFT JOIN `ecole` ON `formation_ecole`.`id_ecole` = `ecole`.`id_ecole`\n" +
             "WHERE `formation`.`duree_etude` LIKE '%' :recherche '%';", nativeQuery = true)
     List<EcoleEntity> findByNvEtude(@Param("recherche") String recherche);
+
+
+    @Query(value = "SELECT * FROM `ecole` LIMIT   :limit  OFFSET :offset ;", nativeQuery = true)
+    List<EcoleEntity> findAllByPage(@Param("limit") int limit, @Param("offset") int offset );
+
+    @Query(value = "SELECT COUNT(*) as count FROM `ecole` GROUP BY nom ORDER BY count DESC;", nativeQuery = true)
+    List<Integer> findNbOccurenceEcole();
 }

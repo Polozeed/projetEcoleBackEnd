@@ -1,6 +1,7 @@
 package ecole.projetEcole.controller;
 
 import ecole.projetEcole.dto.ecole.EcoleDto;
+import ecole.projetEcole.repository.EcoleRepository;
 import ecole.projetEcole.service.ServiceEcole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,8 @@ public class EcoleController {
 
     @Autowired
     ServiceEcole serviceEcole;
+    @Autowired
+    EcoleRepository ecoleRepository;
 
 
     @CrossOrigin(origins = "http://localhost:4200")
@@ -85,6 +88,24 @@ public class EcoleController {
     public ResponseEntity<List<EcoleDto>> listeEcoles(){
         List<EcoleDto> ecolesDtoList  = serviceEcole.listeEcole();
         return new ResponseEntity<>(ecolesDtoList,HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/nbEcoles")
+    public ResponseEntity<Integer> nbEcoles(){
+        int compt = 0;
+        List<Integer> valeur  = ecoleRepository.findNbOccurenceEcole();
+        for (Integer val: valeur ){
+            compt = compt + 1;
+        }
+        return new ResponseEntity<>(compt,HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/ecolesPage/{limit}/{offset}")
+    public ResponseEntity<List<EcoleDto>> listeEcolesParPage(@PathVariable("limit")int limit, @PathVariable("offset")int offset){
+        List<EcoleDto> ecoleDtoList  = serviceEcole.listEcolePourChargementParPage(limit,offset);
+        return new ResponseEntity<>(ecoleDtoList,HttpStatus.OK);
     }
 
 

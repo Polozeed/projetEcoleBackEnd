@@ -78,7 +78,7 @@ public class EvenementController {
         List<EvenementDto> eventDtoList  = serviceEvenement.listEvenementPourChargementParPage(limit,offset);
         return new ResponseEntity<>(eventDtoList,HttpStatus.OK);
     }
-    // Test recuperation occurence Evenement en base
+
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/nbEvenement")
     public ResponseEntity<Integer> nbEvenement(){

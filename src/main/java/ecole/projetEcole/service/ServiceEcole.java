@@ -103,4 +103,13 @@ public class ServiceEcole {
         return ecoleDtoReturn;
     }
 
+    public List<EcoleDto> listEcolePourChargementParPage(int limit, int offset){
+        List<EcoleDto> ecoleDtoListReturn = new ArrayList<>();
+        List<EcoleEntity> ecoleEntityList =  ecoleRepository.findAllByPage(limit, offset);
+        for (EcoleEntity ecole: ecoleEntityList) {
+            ecoleDtoListReturn.add(EcoleMapper.convertToDto(ecole));
+        }
+        return  ecoleDtoListReturn;
+    }
+
 }
