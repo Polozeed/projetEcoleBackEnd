@@ -28,4 +28,10 @@ public class ServiceAdresse {
         adresseRepository.save(adresseEntity);
         return AdresseMapper.convertToDto(adresseEntity);
     }
+
+    public AdresseDto rechercheParId(int id){
+        AdresseEntity adresseEntity = adresseRepository.findById(id).orElse(null);
+        AdresseDto adresseDtoReturn = AdresseMapper.convertToDto(adresseEntity);
+        return  adresseDtoReturn;
+    }
 }

@@ -19,22 +19,17 @@ public class EcoleController {
     @Autowired
     EcoleRepository ecoleRepository;
 
-
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/ecole")
-    public ResponseEntity<String> postEcole(@RequestBody EcoleDto ecole) {
+    public ResponseEntity<EcoleDto> postEcole(@RequestBody EcoleDto ecole) {
         EcoleDto ecoleReturn = serviceEcole.addEcole(ecole);
-        if (ecole.equals(ecoleReturn)) {
-            return new ResponseEntity<>( "Insertion OK : " + ecole.toString(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Erreur", HttpStatus.BAD_REQUEST);
-        }
+            return new ResponseEntity<EcoleDto>( ecoleReturn, HttpStatus.OK);
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("ecole/{id}")
-    public ResponseEntity<String> rechercheEcoleId(@PathVariable("id") int id){
+    public ResponseEntity<EcoleDto> rechercheEcoleId(@PathVariable("id") int id){
         EcoleDto ecoleDto = serviceEcole.rechercheParId(id);
-        return new ResponseEntity<>( ecoleDto.toString(), HttpStatus.OK);
+        return new ResponseEntity<EcoleDto>( ecoleDto, HttpStatus.OK);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")

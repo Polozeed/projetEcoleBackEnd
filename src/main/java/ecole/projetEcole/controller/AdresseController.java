@@ -33,4 +33,11 @@ public class AdresseController {
         }
 
     }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("adresse/{id}")
+    public ResponseEntity<AdresseDto> rechercheEcoleId(@PathVariable("id") int id){
+        AdresseDto adresseDto = serviceAdresse.rechercheParId(id);
+        return new ResponseEntity<AdresseDto>( adresseDto, HttpStatus.OK);
+    }
 }
